@@ -9,11 +9,18 @@
     ]
   },
   "rules": {
+    "semicolon": [
+      true,
+      "never"
+    ],
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "no-consecutive-blank-lines": false
+    "trailing-comma": false,
+    "no-console": false,
+    "no-consecutive-blank-lines": false,
+    "member-access": [true, "no-public"]
   }
 }
