@@ -599,6 +599,7 @@
 
 <style lang="scss">
 .mj-daterange-picker  {
+  text-align: left;
   min-width: 400px;
   width: var(--default-width);
   user-select: none;
