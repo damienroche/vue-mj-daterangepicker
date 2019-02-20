@@ -9985,10 +9985,10 @@ vue-loader@^15.6.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-mj-daterangepicker@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/vue-mj-daterangepicker/-/vue-mj-daterangepicker-0.1.3.tgz#980f16c550b317f7ae25fc8b13fa9331c714b852"
-  integrity sha512-Bics81SlaW/jPadv3kWMz/lSp/61WvoGpQ4T3crAsQ/HnOjvfmbQzXi88QMjUZTTqTTQjpUI8dbLVpUZmBjI7w==
+vue-mj-daterangepicker@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/vue-mj-daterangepicker/-/vue-mj-daterangepicker-0.1.5.tgz#0783af1288d8f50c3970299f743e5f02165ca6e1"
+  integrity sha512-MbxafaKri2tqW1hfzC++jegGS6ETu0CPL0WGYu/VdTG5ZO2JZXNQGSivc5IbDQ4GTcHTHuvosdOqFXKSDf9viw==
   dependencies:
     date-fns "^1.30.1"
     node-sass "^4.11.0"

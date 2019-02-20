@@ -64,7 +64,7 @@ theme = {
 
 ### Presets
 ```
-available presets : ['custom', 'today', 'yesterday', 'last7days', 'next7days', 'last30days', 'next30days', 'last90days', 'next90days', 'last365days', 'next365days', 'forever']
+available presets : ['custom', 'today', 'yesterday', 'tomorrow', 'last7days', 'next7days', 'last30days', 'next30days', 'last90days', 'next90days', 'last365days', 'next365days', 'forever']
 ```
 warning: `forever` need `begin` props to be set.
 
