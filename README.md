@@ -66,6 +66,19 @@ theme = {
 ```
 available presets : ['custom', 'today', 'yesterday', 'last7days', 'next7days', 'last30days', 'next30days', 'last90days', 'next90days', 'last365days', 'next365days', 'forever']
 ```
+
+## Events
+
+This datepicker emit two events, @reset and @update
+both return an object with the start and date date, plus the active panel
+```javascript
+{
+  to: '2019-04-23T10:26:00.996Z',
+  from: '2018-04-23T10:26:00.996Z'
+  panel: 'range'
+}
+```
+
 ## Examples
 
 ```vue
