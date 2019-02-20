@@ -29,22 +29,22 @@ Vue.use(DateRangePicker)
 
 ## Props
 
-|Name   | Type  | Default | Description  |
-|---|---|---|---|---|
-|`locale`   | String  | en  | set the locale ['en', 'fr] |
-|`from`   | String  | null    |  ISO-8601 date of start range |
-|`to`   | String |   | ISO-8601 date of end range |
-|`begin`| String | null | ISO-8601 date to display `since beginning` range
-|`past`| Boolean | true | allow/disallow user to select past dates
-|`future`| Boolean | true | allow/disallow user to select future dates
-|`panel`| String | null | choose which panel to be open by default
-|`panels`| Array | [ 'range', 'week', 'month', 'quarter', 'year' ] | choose which panels to be available
-|`yearsCount`| Number | 2 | number of past/future years to display in `year` panel
-|`theme`| Object | see customize section | customize colors
-|`width`| String | 'auto' | set component width
-|`resetTitle`| String | Reset | change Reset button title
-|`submitTitle`| String | Submit | change Submit button title
-|`presets`| Object | see preset section | select which presets to be available
+| Name          | Type    | Default                                         | Description                                            |
+|---------------|---------|-------------------------------------------------|--------------------------------------------------------|
+| `locale`      | String  | en                                              | set the locale ['en', 'fr]                             |
+| `from`        | String  | null                                            | ISO-8601 date of start range                           |
+| `to`          | String  |                                                 | ISO-8601 date of end range                             |
+| `begin`       | String  | null                                            | ISO-8601 date to display `since beginning` range       |
+| `past`        | Boolean | true                                            | allow/disallow user to select past dates               |
+| `future`      | Boolean | true                                            | allow/disallow user to select future dates             |
+| `panel`       | String  | null                                            | choose which panel to be open by default               |
+| `panels`      | Array   | [ 'range', 'week', 'month', 'quarter', 'year' ] | choose which panels to be available                    |
+| `yearsCount`  | Number  | 2                                               | number of past/future years to display in `year` panel |
+| `theme`       | Object  | see customize section                           | customize colors                                       |
+| `width`       | String  | 'auto'                                          | set component width                                    |
+| `resetTitle`  | String  | Reset                                           | change Reset button title                              |
+| `submitTitle` | String  | Submit                                          | change Submit button title                             |
+| `presets`     | Object  | see preset section                              | select which presets to be available                   |
 
 ### Customize
 ```javascript
@@ -70,7 +70,7 @@ available presets : ['custom', 'today', 'yesterday', 'last7days', 'next7days', '
 
 ```vue
 <template>
-  <date-range-picker :from="$route.query.from" :to="$route.query.to" :panel="$route.query.panel" @update="update"></cleave>
+  <date-range-picker :from="$route.query.from" :to="$route.query.to" :panel="$route.query.panel" @update="update"/>
 </template>
 
 <script>
