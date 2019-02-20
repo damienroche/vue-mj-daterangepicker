@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     div(style="margin: 20px 0;")
-      simple-date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" locale="fr")
+      simple-date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" locale="fr" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00")
       //- pre Date Picker 1
       //- date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" :past="false" :dark="false")
     div(style="margin: 20px 0;")
@@ -35,7 +35,8 @@
     checkUpdate(values) {
       this.$router.push({ query: Object.assign({}, this.$route.query, {
         to: values.to,
-        from: values.from
+        from: values.from,
+        panel: values.panel
       }) })
     }
   }
