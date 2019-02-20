@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import DateRangePicker from './DateRangePicker.vue'
 
-const components = {
-  DateRangePicker
+const plugin = {
+  install(Vue, options) {
+    Vue.component('DateRangePicker', DateRangePicker)
+  }
 }
 
-Object.keys(components).forEach(name => {
-  Vue.component(name, components[name])
-})
-
-export default components
+export default plugin
