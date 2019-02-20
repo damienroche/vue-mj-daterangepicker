@@ -1,8 +1,8 @@
 <template lang="pug">
   .mj-daterange-picker(:style="cssProps")
-    .panels-choices
+    .panels-choices(v-if="availablePanels.length > 1")
       .panel-button(
-        v-for="panel in panels"
+        v-for="panel in availablePanels"
         :class="{'is-current': panel === currentPanel}"
         @click="currentPanel = panel"
         ) {{ $legends[locale].panels[panel] }}
@@ -10,7 +10,35 @@
     .preset-ranges(v-if="isPresetPicker")
       .preset(v-for="entry in availablePresets")
         input(type="radio" v-model="preset" :id="entry" :value="entry")
-        label(:for="entry") {{ $legends[locale].presets[entry] }}
+        label(:for="entry")
+          span.check
+          span {{ $legends[locale].presets[entry] }}
+
+    .mj-calendar(:class="weekSelector ? 'mj-calendar-week' : 'mj-calendar-days'" v-if="isDaysPicker")
+      .calendar-header
+        .calendar-previous-month.calendar-arrow.calendar-arrow-previous(
+          :aria-label="$legends[locale].previousMonth"
+          @click="changeMonth(1)"
+        )
+          svgicon(icon="arrow-left" width="7.4" height="12")
+        .calendar-month-name {{ currentMonthName }}
+        .calendar-previous-month.calendar-arrow.calendar-arrow-next(
+          :aria-label="$legends[locale].nextMonth"
+          @click="changeMonth(-1)")
+          svgicon(icon="arrow-right" width="7.4" height="12")
+      .calendar-days-name
+        .day(v-for="day in firstWeek")
+          span {{ day.name }}
+      .calendar-days
+        .day(
+          v-for="day in monthDays"
+          :key="day.date | date('DDMMYYYY')"
+          :class="dayClasses(day)"
+          @click="selectDay(day.date)"
+          @mouseover="hoverizeDay(day.date)"
+          @mouseleave="hoverRange = []"
+        )
+          span {{ day.date | date('D') }}
 
     .mj-calendar(v-if="isMonthsPicker")
       .calendar-header
@@ -45,31 +73,15 @@
             .month(v-for="month in quarter.months")
               span {{ month.displayDate }}
 
-    .mj-calendar(:class="weekSelector ? 'mj-calendar-week' : 'mj-calendar-days'" v-if="isDaysPicker")
-      .calendar-header
-        .calendar-previous-month.calendar-arrow.calendar-arrow-previous(
-          :aria-label="$legends[locale].previousMonth"
-          @click="changeMonth(1)"
+    .mj-calendar(v-if="isYearPicker")
+      .calendar-years
+        .year(
+          v-for="year in years"
+          @click="selectYear(year)"
+          :class="yearClasses(year)"
         )
-          svgicon(icon="arrow-left" width="7.4" height="12")
-        .calendar-month-name {{ currentMonthName }}
-        .calendar-previous-month.calendar-arrow.calendar-arrow-next(
-          :aria-label="$legends[locale].nextMonth"
-          @click="changeMonth(-1)")
-          svgicon(icon="arrow-right" width="7.4" height="12")
-      .calendar-days-name
-        .day(v-for="day in firstWeek")
-          span {{ day.name }}
-      .calendar-days
-        .day(
-          v-for="day in monthDays"
-          :key="day.date | date('DDMMYYYY')"
-          :class="dayClasses(day)"
-          @click="selectDay(day.date)"
-          @mouseover="hoverizeDay(day.date)"
-          @mouseleave="hoverRange = []"
-        )
-          span {{ day.date | date('D') }}
+          span {{ year.displayDate }}
+
     .mj-daterange-picker-controls
       .mj-daterange-picker-button.mj-daterange-picker-reset(
         @click="reset"
@@ -88,29 +100,30 @@
   import './../assets/icons'
   import { dateFilter } from 'vue-date-fns'
   import {
-    parse,
-    isValid,
-    format,
-    endOfMonth,
-    startOfMonth,
-    isBefore,
-    isAfter,
     addDays,
-    addYears,
-    addWeeks,
     addMonths,
+    addWeeks,
+    addYears,
+    endOfDay,
+    endOfMonth,
+    endOfWeek,
+    endOfYear,
+    format,
+    isAfter,
+    isBefore,
+    isSameDay,
+    isSameMonth,
+    isValid,
+    isWithinRange,
+    parse,
+    startOfDay,
+    startOfMonth,
+    startOfWeek,
+    startOfYear,
     subDays,
     subMonths,
     subWeeks,
-    subYears,
-    isSameMonth,
-    isSameDay,
-    isWithinRange,
-    startOfDay,
-    startOfWeek,
-    startOfYear,
-    endOfWeek,
-    endOfDay
+    subYears
   } from 'date-fns'
 
   import dictionnaries from '../translations/index.js'
@@ -134,7 +147,6 @@
   export default class extends Vue {
     $legends: any
     currentPanel = null
-    panels = [ 'range', 'week', 'month', 'quarter', 'year' ]
 
     current = null
     weekSelector = false
@@ -179,8 +191,18 @@
 
     @Prop({
       type: String,
-      default: 'range'
+      default: null
     }) panel
+
+    @Prop({
+      type: Number,
+      default: 2
+    }) yearsCount
+
+    @Prop({
+      type: Array,
+      default: () => [ 'range', 'week', 'month', 'quarter', 'year' ]
+    }) panels
 
     @Prop({
       type: Object,
@@ -189,6 +211,7 @@
           primary: '#3297DB',
           secondary: '#2D3E50',
           ternary: '#93A0BD',
+          border: '#e6e6e6',
           light: '#ffffff',
           dark: '#000000',
           hovers: {
@@ -198,11 +221,6 @@
         }
       }
     }) theme
-
-    @Prop({
-      type: Boolean,
-      default: false
-    }) dark
 
     @Prop({
       type: String,
@@ -232,6 +250,9 @@
 
     @Watch('preset')
     affectPreset(preset) {
+      this.current = this.now
+      this.updateCalendar()
+
       switch (preset) {
         case 'custom':
           this.values = { from: null, to: null }
@@ -272,6 +293,10 @@
       }
     }
 
+    get availablePanels() {
+      return this.panels
+    }
+
     get availablePresets() {
       const index = this.presets.indexOf('forever')
       if (!this.begin && index > -1 ) {
@@ -307,8 +332,9 @@
         '--hover-range-color': this.theme.hovers.range,
         '--secondary-color': this.theme.secondary,
         '--ternary-color': this.theme.ternary,
-        '--normal-color': !this.dark ? this.theme.light : this.theme.dark,
-        '--contrast-color': this.dark ? this.theme.light : this.theme.dark
+        '--normal-color': this.theme.light,
+        '--contrast-color': this.theme.dark,
+        '--border-color': this.theme.border
       }
     }
 
@@ -338,6 +364,22 @@
       return quarters
     }
 
+    get years() {
+      const years = []
+      let i: number = this.yearsCount
+      let start = this.future ? addYears(this.now, this.yearsCount) : this.now
+
+      i = +this.future * this.yearsCount + +this.past * this.yearsCount + 1
+
+      while (i !== 0) {
+        years.push({ date: start, displayDate: format(start, 'YYYY', { locale: locales[this.locale] }) })
+        start = subYears(start, 1)
+        i = i - 1
+      }
+
+      return years
+    }
+
     get currentMonthName() {
       return format(this.current, 'MMMM YYYY', { locale: locales[this.locale] })
     }
@@ -356,6 +398,10 @@
 
     get isMonthsPicker(): boolean {
       return this.currentPanel === 'month' || this.currentPanel === 'quarter'
+    }
+
+    get isYearPicker(): boolean {
+      return this.currentPanel === 'year'
     }
 
     get isMonthsPanel(): boolean {
@@ -381,7 +427,7 @@
       this.updateCalendar()
 
       // Set current panel
-      this.currentPanel = this.panel || this.panels[0]
+      this.currentPanel = this.panel || this.availablePanels[0]
     }
 
     reset() {
@@ -443,6 +489,12 @@
     selectMonth(month) {
       this.values.from = startOfMonth(month.date)
       this.values.to = endOfMonth(month.date)
+      this.current = this.values.to
+    }
+
+    selectYear(year) {
+      this.values.from = startOfYear(year.date)
+      this.values.to = endOfYear(year.date)
       this.current = this.values.to
     }
 
@@ -515,16 +567,6 @@
       return classes
     }
 
-    quarterClasses(quarter) {
-      const classes = []
-      if (this.values.to && this.values.from) {
-        if (isSameDay(this.values.from, quarter.range.start) && isSameDay(this.values.to, quarter.range.end)) {
-          classes.push('is-selected')
-        }
-      }
-      return classes
-    }
-
     monthClasses(month) {
       const classes = []
       if (this.values.to && this.values.from && isWithinRange(month.date, this.values.from, this.values.to)) {
@@ -533,28 +575,24 @@
       return classes
     }
 
-    startOfDay(day) {
-      return startOfDay(day)
+    quarterClasses(quarter) {
+      const classes = []
+      if (this.values.to && this.values.from &&
+        isWithinRange(quarter.range.start, this.values.from, this.values.to) &&
+        isWithinRange(quarter.range.end, this.values.from, this.values.to)) {
+          classes.push('is-selected')
+      }
+      return classes
     }
 
-    endOfDay(day) {
-      return endOfDay(day)
-    }
-
-    subDays(day, amount) {
-      return subDays(day, amount)
-    }
-
-    subMonths(day, amount) {
-      return subMonths(day, amount)
-    }
-
-    subWeeks(day, amount) {
-      return subWeeks(day, amount)
-    }
-
-    subYears(day, amount) {
-      return subYears(day, amount)
+    yearClasses(year) {
+      const classes = []
+      if (this.values.to && this.values.from) {
+        if (isSameDay(this.values.from, startOfYear(year.date)) && isSameDay(this.values.to, endOfYear(year.date))) {
+          classes.push('is-selected')
+        }
+      }
+      return classes
     }
   }
 </script>
@@ -564,7 +602,7 @@
   min-width: 400px;
   width: var(--default-width);
   user-select: none;
-  border: 1px solid #E6E6E6;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
 
   & * {
@@ -576,7 +614,7 @@
   display: grid;
   grid-gap: 10px 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  border-bottom: 1px solid #E6E6E6;
+  border-bottom: 1px solid var(--border-color);
   padding: 20px;
 
   .panel-button {
@@ -603,13 +641,63 @@
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--border-color);
 
   .preset {
     width: 50%;
     font-size: 13px;
     height: 20px;
-    padding: 5px 0;
     cursor: pointer;
+    position: relative;
+    margin: 5px 0;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      height: 0;
+      width: 0;
+
+      &:checked ~ label .check {
+        background-color: var(--primary-color);
+
+        &::after {
+          background-color: transparent;
+        }
+      }
+    }
+
+    label {
+      display: inline-flex;
+      align-items: center;
+
+      span + span {
+        margin-left: 10px;
+      }
+
+      .check {
+        display: block;
+        position: relative;
+        height: 20px;
+        width: 20px;
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          height: 10px;
+          width: 10px;
+          left: 50%;
+          top: 50%;
+          background-color: white;
+          border-radius: 100%;
+          border: 3px solid white;
+          transform: translateX(-50%) translateY(-50%);
+        }
+
+      }
+    }
+
 
     * {
       cursor: pointer;
@@ -653,7 +741,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #e6e6e6;
+      border: 1px solid var(--border-color);
       border-radius: 4px;
       font-size: 13px;
 
@@ -688,7 +776,7 @@
         grid-gap: 10px 10px;
         align-items: center;
         grid-template-columns: 1fr 1fr 1fr;
-        border: 1px solid #e6e6e6;
+        border: 1px solid var(--border-color);
         border-radius: 4px;
         height: 50px;
         padding: 10px 30px;
@@ -708,6 +796,33 @@
       }
 
       &:not(.is-disabled) .months {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .calendar-years {
+    .year {
+      height: 50px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 13px;
+      margin: 10px 0;
+
+      &:hover {
+        background-color: var(--hover-range-color);
+      }
+
+      &.is-selected {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      &:not(.is-disabled) {
         cursor: pointer;
       }
     }
@@ -798,7 +913,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid #E6E6E6;
+  border-top: 1px solid var(--border-color);
   padding: 20px;
 
   .mj-daterange-picker-button {

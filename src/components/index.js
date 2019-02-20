@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import SimpleDateRangePicker from './SimpleDateRangePicker.vue'
+import DateRangePicker from './DateRangePicker.vue'
 
 const components = {
-  SimpleDateRangePicker
+  DateRangePicker
 }
 
 Object.keys(components).forEach(name => {
