@@ -42,8 +42,8 @@ Vue.use(DateRangePicker)
 | `yearsCount`  | Number  | 2                                               | number of past/future years to display in `year` panel |
 | `theme`       | Object  | see customize section                           | customize colors                                       |
 | `width`       | String  | 'auto'                                          | set component width                                    |
-| `resetTitle`  | String  | Reset                                           | change Reset button title                              |
-| `submitTitle` | String  | Submit                                          | change Submit button title                             |
+| `resetTitle`  | String  | 'Reset'                                         | change Reset button title                              |
+| `submitTitle` | String  | 'Submit'                                        | change Submit button title                             |
 | `presets`     | Object  | see preset section                              | select which presets to be available                   |
 
 ### Customize
