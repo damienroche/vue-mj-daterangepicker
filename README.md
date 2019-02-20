@@ -70,7 +70,7 @@ available presets : ['custom', 'today', 'yesterday', 'last7days', 'next7days', '
 ## Events
 
 This datepicker emit two events, @reset and @update
-both return an object with the start and date date, plus the active panel
+both return an object with the start and end date, plus the active panel
 ```javascript
 {
   to: '2019-04-23T10:26:00.996Z',
