@@ -263,6 +263,9 @@
         case 'yesterday':
           this.values = { from: startOfDay(subDays(this.now, 1)), to: endOfDay(subDays(this.now, 1)) }
           break
+        case 'tomorrow':
+          this.values = { from: startOfDay(addDays(this.now, 1)), to: endOfDay(addDays(this.now, 1)) }
+          break
         case 'last7days':
           this.values = { from: startOfDay(subWeeks(this.now, 1)), to: this.now }
           break
