@@ -43,7 +43,7 @@ const dictonnaries = {
       week: 'Week',
       month: 'Month',
       quarter: 'Quarter',
-      year: 'Week'
+      year: 'Year'
     },
     presets: {
       custom: 'Custom range',
