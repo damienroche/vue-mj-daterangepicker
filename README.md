@@ -20,7 +20,7 @@ yarn add vue-mj-daterangepicker
 ```javascript
 import Vue from 'vue'
 import DateRangePicker from 'vue-mj-daterangepicker'
-import 'vue-mj-datepicker/dist/vue-mj-datepicker.css'
+import 'vue-mj-daterangepicker/dist/vue-mj-daterangepicker.css'
 
 ...
 
