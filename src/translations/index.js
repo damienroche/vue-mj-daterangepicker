@@ -60,6 +60,37 @@ const dictonnaries = {
       tomorrow: 'Tomorrow',
       yesterday: 'Yesterday'
     }
+  },
+  de: {
+    reset: 'Zurücksetzen',
+    submit: 'Ok',
+    previousMonth: 'Letztes Monat',
+    nextMonth: 'Nächstes Monat',
+    previousYear: 'Letztes Jahr',
+    nextYear: 'Nächstes Jahr',
+    quarter: 'Quartal',
+    panels: {
+      range: 'Zeitraum',
+      week: 'Woche',
+      month: 'Monat',
+      quarter: 'Quartal',
+      year: 'Jahr'
+    },
+    presets: {
+      custom: 'Benutzerdefiniert',
+      forever: 'Von Anfang',
+      last7days: 'Letzten 7 Tage',
+      last30days: 'Letzten 30 Tage',
+      last90days: 'Letzten 90 Tage',
+      last365days: 'Letzten 365 Tage',
+      next365days: 'Nächsten 365 Tage',
+      next90days: 'Nächsten 90 Tage',
+      next30days: 'Nächsten 30 Tage',
+      next7days: 'Nächsten 7 Tage',
+      today: 'Heute',
+      tomorrow: 'Morgen',
+      yesterday: 'Gestern'
+    }
   }
 }
 
