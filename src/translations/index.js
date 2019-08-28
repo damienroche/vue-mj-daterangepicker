@@ -60,7 +60,7 @@ const dictonnaries = {
       tomorrow: 'Tomorrow',
       yesterday: 'Yesterday'
     }
-  }
+  },
   es: {
     reset: 'Quitar selección',
     submit: 'Guardar',
