@@ -77,7 +77,7 @@ const dictonnaries = {
       year: 'Anual'
     },
     presets: {
-      custom: 'Personalizad',
+      custom: 'Selección personalizada',
       forever: 'Desde el principio',
       last7days: 'Últimos 7 días',
       last30days: 'Últimos 30 días',
