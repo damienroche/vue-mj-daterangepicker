@@ -40,7 +40,7 @@
     "@vue/cli-service": "^3.4.0",
     "babel-preset-vue": "^2.0.2",
     "typescript": "^3.0.0",
-    "vue-mj-daterangepicker": "^0.1.5",
+    "vue-mj-daterangepicker": "^0.1.6",
     "vue-template-compiler": "^2.5.21"
   },
   "browserslist": [
