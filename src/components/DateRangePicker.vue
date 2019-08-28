@@ -130,9 +130,13 @@
 
   Vue.prototype.$legends = dictionnaries
 
+  console.log(dictionnaries)
+
   const locales = {
     en: require('date-fns/locale/en'),
-    fr: require('date-fns/locale/fr')
+    fr: require('date-fns/locale/fr'),
+    de: require('date-fns/locale/de'),
+    es: require('date-fns/locale/es')
   }
 
   Vue.use(SvgIcon, {

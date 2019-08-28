@@ -40,10 +40,26 @@ storiesOf('DateRangePicker', module)
     },
     template: '<date-range-picker :theme="theme"/>'
   }))
-  .add('Locale', () => ({
+  .add('Locale FR', () => ({
     data() {
       return {
         locale: 'fr'
+      }
+    },
+    template: '<date-range-picker :locale="locale"/>'
+  }))
+  .add('Locale DE', () => ({
+    data() {
+      return {
+        locale: 'de'
+      }
+    },
+    template: '<date-range-picker :locale="locale"/>'
+  }))
+  .add('Locale ES', () => ({
+    data() {
+      return {
+        locale: 'es'
       }
     },
     template: '<date-range-picker :locale="locale"/>'
