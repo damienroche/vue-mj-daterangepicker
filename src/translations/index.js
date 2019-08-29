@@ -108,7 +108,7 @@ const dictonnaries = {
       "year": "Anual"
     },
     "presets": {
-      "custom": "Personalizad",
+      "custom": "Selección personalizada",
       "forever": "Desde el principio",
       "last7days": "Últimos 7 días",
       "last30days": "Últimos 30 días",
@@ -121,37 +121,6 @@ const dictonnaries = {
       "today": "Hoy",
       "tomorrow": "Mañana",
       "yesterday": "Ayer"
-    }
-  },
-  es: {
-    reset: 'Quitar selección',
-    submit: 'Guardar',
-    previousMonth: 'mes anterior',
-    nextMonth: 'mes siguiente',
-    previousYear: 'año anterior',
-    nextYear: 'año siguiente',
-    quarter: 'Trimestre',
-    panels: {
-      range: 'Rango',
-      week: 'Semanal',
-      month: 'Mensual',
-      quarter: 'Trimestral',
-      year: 'Anual'
-    },
-    presets: {
-      custom: 'Selección personalizada',
-      forever: 'Desde el principio',
-      last7days: 'Últimos 7 días',
-      last30days: 'Últimos 30 días',
-      last90days: 'Últimos 90 días',
-      last365days: 'Últimos 365 días',
-      next365days: 'Próximos 365 días',
-      next90days: 'Próximos 90 días',
-      next30days: 'Próximos 30 días',
-      next7days: 'Próximos 7 días',
-      today: 'Hoy',
-      tomorrow: 'Mañana',
-      yesterday: 'Ayer'
     }
   },
 }
