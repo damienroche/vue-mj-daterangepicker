@@ -122,7 +122,38 @@ const dictonnaries = {
       "tomorrow": "Mañana",
       "yesterday": "Ayer"
     }
-  }
+  },
+  "ru": {
+    "reset": "Сбросить",
+    "submit": "Применить",
+    "previousMonth": "Предыдущий месяц",
+    "nextMonth": "Следующий месяц",
+    "previousYear": "Предыдущий год",
+    "nextYear": "Следующий год",
+    "quarter": "Квартал",
+    "panels": {
+      "range": "Период",
+      "week": "Неделя",
+      "month": "Месяц",
+      "quarter": "Квартал",
+      "year": "Год"
+    },
+    "presets": {
+      "custom": "Пользовательский диапазон",
+      "forever": "С начала",
+      "last7days": "Последние 7 дней",
+      "last30days": "Последние 30 дней",
+      "last90days": "Последние 90 дней",
+      "last365days": "Последние 365 дней",
+      "next365days": "Следующие 365 дней",
+      "next90days": "Следующие 90 дней",
+      "next30days": "Следующие 30 дней",
+      "next7days": "Следующие 7 дней",
+      "today": "Сегодня",
+      "tomorrow": "Завтра",
+      "yesterday": "Вчера"
+    }
+  },
 }
 
 export default dictonnaries

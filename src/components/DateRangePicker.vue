@@ -136,7 +136,8 @@
     en: require('date-fns/locale/en'),
     fr: require('date-fns/locale/fr'),
     de: require('date-fns/locale/de'),
-    es: require('date-fns/locale/es')
+    es: require('date-fns/locale/es'),
+    ru: require('date-fns/locale/ru'),
   }
 
   Vue.use(SvgIcon, {
