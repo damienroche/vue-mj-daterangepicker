@@ -130,8 +130,6 @@
 
   Vue.prototype.$legends = dictionnaries
 
-  console.log(dictionnaries)
-
   const locales = {
     en: require('date-fns/locale/en'),
     fr: require('date-fns/locale/fr'),
