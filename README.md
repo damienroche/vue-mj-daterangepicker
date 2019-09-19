@@ -31,7 +31,7 @@ Vue.use(DateRangePicker)
 
 | Name          | Type    | Default                                         | Description                                            |
 |---------------|---------|-------------------------------------------------|--------------------------------------------------------|
-| `locale`      | String  | en                                              | set the locale ['de', 'es', en', 'fr']                             |
+| `locale`      | String  | en                                              | set the locale ['de', 'es', en', 'fr', 'ru']                             |
 | `from`        | String  | null                                            | ISO-8601 date of start range                           |
 | `to`          | String  | null                                            | ISO-8601 date of end range                             |
 | `begin`       | String  | null                                            | ISO-8601 date to display `since beginning` range       |
