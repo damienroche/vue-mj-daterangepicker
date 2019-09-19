@@ -6,9 +6,17 @@
       //- date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" :past="false" :dark="false")
     div(style="margin: 20px 0;")
       date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" :theme="theme")
-    //- div
-      pre Date Picker 2
-      date-range-picker(to="2019-02-19T23:00:00.000Z" from="2019-02-15T23:00:00.000Z" @update="checkUpdate" locale="fr")
+    div(style="margin: 20px 0;")
+      button(
+        v-for="localeValue in locales"
+        :key="localeValue"
+        class="button"
+        :class="localeValue === locale && 'selected'"
+        @click.prevent="() => switchLocation(localeValue)"
+      )
+        span {{ localeValue.toUpperCase() }}
+    div(style="margin: 20px 0;")
+      date-range-picker(to="2019-02-19T23:00:00.000Z" from="2019-02-15T23:00:00.000Z" @update="checkUpdate" :locale="locale")
 </template>
 
 <script lang="ts">
@@ -33,6 +41,8 @@
         range: '#e6e6e6'
       }
     }
+    locale: string = 'fr'
+    locales: string[] = ['en', 'de', 'ru', 'es', 'fr']
     checkUpdate(values) {
       this.$router.push({ query: Object.assign({}, this.$route.query, {
         to: values.to,
@@ -40,5 +50,32 @@
         panel: values.panel
       }) })
     }
+    switchLocation(localeValue) {
+      this.locale = localeValue
+    }
   }
 </script>
+
+<style>
+.button {
+    appearance: none;
+    border: 0;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 32px;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #F2F4F5;
+}
+
+.button + .button {
+    margin-left: .25em;
+}
+    
+.button.selected {
+    background-color: #3297DB;
+    color: #F2F4F5;
+}
+</style>
