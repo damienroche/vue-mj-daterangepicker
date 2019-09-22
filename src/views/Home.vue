@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     div(style="margin: 20px 0;")
-      date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" locale="de" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00")
+      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="de" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false")
       //- pre Date Picker 1
       //- date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" :past="false" :dark="false")
     div(style="margin: 20px 0;")
@@ -73,7 +73,7 @@
 .button + .button {
     margin-left: .25em;
 }
-    
+
 .button.selected {
     background-color: #3297DB;
     color: #F2F4F5;

@@ -82,7 +82,7 @@
         )
           span {{ year.displayDate }}
 
-    .mj-daterange-picker-controls
+    .mj-daterange-picker-controls(v-if="showControls")
       .mj-daterange-picker-button.mj-daterange-picker-reset(
         @click="reset"
       )
@@ -193,6 +193,11 @@
     }) future
 
     @Prop({
+      type: Boolean,
+      default: true
+    }) showControls
+
+    @Prop({
       type: String,
       default: null
     }) panel
@@ -249,6 +254,17 @@
     switchMode(panel) {
       this.weekSelector = panel === 'range' ? false : true
       this.updateCalendar()
+    }
+
+    @Watch('values', { deep: true })
+    emitValuesWithSelect(values) {
+      if (values.from && values.to) {
+        this.$emit('select', {
+          to: format(endOfDay(this.values.to), 'YYYY-MM-DDTHH:mm:ss.SSSZ'),
+          from: format(startOfDay(this.values.from), 'YYYY-MM-DDTHH:mm:ss.SSSZ'),
+          panel: this.currentPanel
+        })
+      }
     }
 
     @Watch('preset')
