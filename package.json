@@ -1,6 +1,6 @@
 {
   "name": "vue-mj-daterangepicker",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "./dist/vue-mj-daterangepicker.common.js",
   "author": "damien roche <damienroche@free.fr>",
   "keywords": [
@@ -38,6 +38,7 @@
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-typescript": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
+    "babel-preset-vue": "^2.0.2",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
   },
