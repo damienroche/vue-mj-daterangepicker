@@ -40,6 +40,7 @@ Vue.use(DateRangePicker)
 | `panel`       | String  | null                                            | choose which panel to be open by default               |
 | `panels`      | Array   | [ 'range', 'week', 'month', 'quarter', 'year' ] | choose which panels to be available                    |
 | `yearsCount`  | Number  | 2                                               | number of past/future years to display in `year` panel |
+| `showControls`| Boolean | true                                            | show bottom controls                                   |
 | `theme`       | Object  | see customize section                           | customize colors                                       |
 | `width`       | String  | 'auto'                                          | set component width                                    |
 | `resetTitle`  | String  | 'Reset'                                         | change Reset button title                              |
@@ -70,8 +71,8 @@ warning: `forever` need `begin` props to be set.
 
 ## Events
 
-This datepicker emit two events, @reset and @update
-both return an object with the start and end date, plus the active panel
+This datepicker emit three events, @update, @select and @reset
+All return an object with the start and end date, plus the active panel
 ```javascript
 {
   to: '2019-04-23T10:26:00.996Z',
