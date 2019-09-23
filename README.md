@@ -78,6 +78,7 @@ This datepicker emit three events, @update, @select and @reset
 @reset is triggered when reset button is clicked
 
 All return an object with the start and end date, plus the active panel
+
 ```javascript
 {
   to: '2019-04-23T10:26:00.996Z',
