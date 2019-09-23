@@ -72,6 +72,11 @@ warning: `forever` need `begin` props to be set.
 ## Events
 
 This datepicker emit three events, @update, @select and @reset
+
+@update is triggered when submit button is clicked.
+@select is triggered when a range is selected, can be useful if you don't want to show bottom controls (with showControls = false)
+@reset is triggered when reset button is clicked
+
 All return an object with the start and end date, plus the active panel
 ```javascript
 {
