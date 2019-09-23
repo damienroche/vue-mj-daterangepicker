@@ -1,11 +1,9 @@
 <template lang="pug">
   div
     div(style="margin: 20px 0;")
-      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="de" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false")
-      //- pre Date Picker 1
-      //- date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" :past="false" :dark="false")
+      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="fr" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false" :presets="['custom']" :panels=['range'] :theme="theme")
     div(style="margin: 20px 0;")
-      date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" :theme="theme")
+      date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" )
     div(style="margin: 20px 0;")
       button(
         v-for="localeValue in locales"

@@ -7,7 +7,7 @@
         @click="currentPanel = panel"
         ) {{ $legends[locale].panels[panel] }}
 
-    .preset-ranges(v-if="isPresetPicker")
+    .preset-ranges(v-if="isPresetPicker && presets.length > 1")
       .preset(v-for="entry in availablePresets")
         input(type="radio" v-model="preset" :id="entry" :value="entry")
         label(:for="entry")

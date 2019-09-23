@@ -73,6 +73,9 @@ storiesOf('DateRangePicker', module)
     },
     template: '<date-range-picker :past="past" :presets="presets"/>'
   }))
+  .add('Disallow bottom controls (use select event)', () => ({
+    template: '<date-range-picker :show-controls="false"/>'
+  }))
   // .add('Custom Theme', () => '<date-range-picker :theme="theme"/>')
   // .add('story as a component', () => ({
   //   components: { MyButton },
