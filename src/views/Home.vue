@@ -14,7 +14,9 @@
       )
         span {{ localeValue.toUpperCase() }}
     div(style="margin: 20px 0;")
-      date-range-picker(to="2019-02-19T23:00:00.000Z" from="2019-02-15T23:00:00.000Z" @update="checkUpdate" :locale="locale")
+      date-range-picker(to="2019-02-19T23:00:00.000Z" from="2019-02-15T23:00:00.000Z" @update="checkUpdate" :locale="locale" allowFrom="")
+    div(style="margin: 20px 0;")
+      date-range-picker(allowTo="2019-10-19T00:00:00.000Z" allowFrom="2019-10-15T00:00:00.000Z" @update="checkUpdate" :locale="locale")
 </template>
 
 <script lang="ts">
