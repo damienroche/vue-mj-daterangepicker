@@ -12,7 +12,8 @@ const dictonnaries = {
       "week": "Semaine",
       "month": "Mois",
       "quarter": "Trimestre",
-      "year": "Année"
+      "year": "Année",
+      "day": "Jour"
     },
     "presets": {
       "custom": "Période personnalisée",
@@ -43,7 +44,8 @@ const dictonnaries = {
       "week": "Week",
       "month": "Month",
       "quarter": "Quarter",
-      "year": "Year"
+      "year": "Year",
+      "day": "Day",
     },
     "presets": {
       "custom": "Custom range",
@@ -74,7 +76,8 @@ const dictonnaries = {
       "week": "Woche",
       "month": "Monat",
       "quarter": "Quartal",
-      "year": "Jahr"
+      "year": "Jahr",
+      "day": "Tag"
     },
     "presets": {
       "custom": "Benutzerdefiniert",
@@ -105,7 +108,8 @@ const dictonnaries = {
       "week": "Semanal",
       "month": "Mensual",
       "quarter": "Trimestral",
-      "year": "Anual"
+      "year": "Anual",
+      "day": "Dia"
     },
     "presets": {
       "custom": "Selección personalizada",
@@ -136,7 +140,8 @@ const dictonnaries = {
       "week": "Неделя",
       "month": "Месяц",
       "quarter": "Квартал",
-      "year": "Год"
+      "year": "Год",
+      "day": "День"
     },
     "presets": {
       "custom": "Пользовательский диапазон",
