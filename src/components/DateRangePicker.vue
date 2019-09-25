@@ -276,6 +276,7 @@ export default class extends Vue {
     this.weekSelector = panel === 'week' ? true : false
     this.daySelector = panel === 'day' ? true : false
     this.updateCalendar()
+    this.$emit('update:panel', panel);
   }
 
   @Watch('values', { deep: true })
