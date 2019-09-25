@@ -276,7 +276,7 @@ export default class extends Vue {
     this.weekSelector = panel === 'week' ? true : false
     this.daySelector = panel === 'day' ? true : false
     this.updateCalendar()
-    this.$emit('update:panel', panel);
+    this.$emit('update:panel', panel)
   }
 
   @Watch('values', { deep: true })
@@ -403,7 +403,9 @@ export default class extends Vue {
     const quarters = []
     for (const [index, month] of this.yearMonths.entries()) {
       if (index % 3 === 0) {
-        const isQuarterAllowed = this.isRangeAllowed([startOfMonth(this.yearMonths[index].date), endOfMonth(this.yearMonths[index + 2].date)])
+        const isQuarterAllowed = this.isRangeAllowed(
+          [startOfMonth(this.yearMonths[index].date), endOfMonth(this.yearMonths[index + 2].date)]
+        )
 
         quarters.push({
           months: [
@@ -526,7 +528,9 @@ export default class extends Vue {
 
   selectDay(date) {
     if (this.weekSelector) {
-      const range = this.getAllowedDatesOfRange([startOfWeek(date, { weekStartsOn: 1 }), endOfWeek(date, { weekStartsOn: 1 })])
+      const range = this.getAllowedDatesOfRange(
+        [startOfWeek(date, { weekStartsOn: 1 }), endOfWeek(date, { weekStartsOn: 1 })]
+      )
 
       this.values.from = range[0]
       this.values.to = range[range.length - 1]
@@ -534,8 +538,8 @@ export default class extends Vue {
     }
 
     if (this.daySelector) {
-      this.values.from = startOfDay(date);
-      this.values.to = startOfDay(date);
+      this.values.from = startOfDay(date)
+      this.values.to = startOfDay(date)
       return
     }
 
