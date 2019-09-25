@@ -187,12 +187,12 @@ export default class extends Vue {
   @Prop({
     type: String,
     default: null
-  }) allowedFrom
+  }) allowFrom
 
   @Prop({
     type: String,
     default: null
-  }) allowedTo
+  }) allowTo
 
   @Prop({
     type: Boolean,
@@ -716,12 +716,12 @@ export default class extends Vue {
   isDateAllowed(date) {
     let isAllowed = true
 
-    if (this.allowedFrom) {
-      isAllowed = isAllowed && !isBefore(date, parse(this.allowedFrom))
+    if (this.allowFrom) {
+      isAllowed = isAllowed && !isBefore(date, parse(this.allowFrom))
     }
 
-    if (this.allowedTo) {
-      isAllowed = isAllowed && !isAfter(date, parse(this.allowedTo))
+    if (this.allowTo) {
+      isAllowed = isAllowed && !isAfter(date, parse(this.allowTo))
     }
 
     return isAllowed
