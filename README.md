@@ -35,6 +35,8 @@ Vue.use(DateRangePicker)
 | `from`        | String  | null                                            | ISO-8601 date of start range                           |
 | `to`          | String  | null                                            | ISO-8601 date of end range                             |
 | `begin`       | String  | null                                            | ISO-8601 date to display `since beginning` range       |
+| `allowFrom`   | String  | null                                            | ISO-8601 date to disable selection of all dates before (strict) |
+| `allowTo`   | String  | null                                            | ISO-8601 date to disable selection of all dates after (strict) |
 | `past`        | Boolean | true                                            | allow/disallow user to select past dates               |
 | `future`      | Boolean | true                                            | allow/disallow user to select future dates             |
 | `panel`       | String  | null                                            | choose which panel to be open by default               |
