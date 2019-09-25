@@ -40,6 +40,32 @@
         )
           span {{ day.date | date('D') }}
 
+    .mj-calendar(:class="weekSelector ? 'mj-calendar-week' : 'mj-calendar-days'" v-if="isDayPicker")
+      .calendar-header
+        .calendar-previous-month.calendar-arrow.calendar-arrow-previous(
+          :aria-label="$legends[locale].previousMonth"
+          @click="changeMonth(1)"
+        )
+          svgicon(icon="arrow-left" width="7.4" height="12")
+        .calendar-month-name {{ currentMonthName }}
+        .calendar-previous-month.calendar-arrow.calendar-arrow-next(
+          :aria-label="$legends[locale].nextMonth"
+          @click="changeMonth(-1)")
+          svgicon(icon="arrow-right" width="7.4" height="12")
+      .calendar-days-name
+        .day(v-for="day in firstWeek")
+          span {{ day.name }}
+      .calendar-days
+        .day(
+          v-for="day in monthDays"
+          :key="day.date | date('DDMMYYYY')"
+          :class="dayClasses(day)"
+          @click="selectDay(day.date)"
+          @mouseover="hoverizeDay(day.date)"
+          @mouseleave="hoverRange = []"
+        )
+          span {{ day.date | date('D') }}
+
     .mj-calendar(v-if="isMonthsPicker")
       .calendar-header
         .calendar-previous-month.calendar-arrow.calendar-arrow-previous(
@@ -153,6 +179,7 @@
 
     current = null
     weekSelector = false
+    daySelector = false
     monthDays = []
     now = new Date().toISOString()
     values = {
@@ -209,7 +236,7 @@
 
     @Prop({
       type: Array,
-      default: () => [ 'range', 'week', 'month', 'quarter', 'year' ]
+      default: () => [ 'range', 'week', 'month', 'quarter', 'year']
     }) panels
 
     @Prop({
@@ -252,7 +279,8 @@
 
     @Watch('currentPanel', { immediate: true })
     switchMode(panel) {
-      this.weekSelector = panel === 'range' ? false : true
+      this.weekSelector = panel === 'week' ? true : false
+      this.daySelector = panel === 'day' ? true : false
       this.updateCalendar()
     }
 
@@ -415,7 +443,7 @@
     }
 
     get isDaysPicker(): boolean {
-      return this.currentPanel === 'range' || this.currentPanel === 'week'
+      return this.currentPanel === 'range' || this.currentPanel === 'week' || this.currentPanel === 'day'
     }
 
     get isMonthsPicker(): boolean {
@@ -488,6 +516,13 @@
         this.values.to = endOfWeek(date, { weekStartsOn: 1 })
         return
       }
+
+      if (this.daySelector) {
+        this.values.from = startOfDay(date);
+        this.values.to = startOfDay(date);
+        return
+      }
+
       if ((this.values.from && this.values.to) || (!this.values.from && !this.values.to)) {
         this.values.from = date
         this.values.to = null
@@ -636,7 +671,7 @@
 .mj-daterange-picker .panels-choices {
   display: grid;
   grid-gap: 10px 10px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   border-bottom: 1px solid var(--border-color);
   padding: 20px;
 
