@@ -154,6 +154,37 @@ const dictonnaries = {
       "yesterday": "Вчера"
     }
   },
+"vi": {
+    "reset": "Đặt lại khoảng ngày",
+    "submit": "Áp dụng",
+    "previousMonth": "Tháng trước",
+    "nextMonth": "Tháng tới",
+    "previousYear": "Năm trước",
+    "nextYear": "Năm tới",
+    "quarter": "Quý",
+    "panels": {
+      "range": "Khoảng",
+      "week": "Tuần",
+      "month": "Tháng",
+      "quarter": "Quý",
+      "year": "Năm"
+    },
+    "presets": {
+      "custom": "Khoảng tùy chỉnh",
+      "forever": "From the beginning",
+      "last7days": "7 ngày gần đây",
+      "last30days": "30 ngày gần đây",
+      "last90days": "90 ngày gần đây",
+      "last365days": "365 ngày gần đây",
+      "next365days": "365 ngày tới",
+      "next90days": "90 ngày tới",
+      "next30days": "30 ngày tới",
+      "next7days": "7 ngày tới",
+      "today": "Hôm nay",
+      "tomorrow": "Ngày mai",
+      "yesterday": "Hôm qua"
+    }
+  },
 }
 
 export default dictonnaries
