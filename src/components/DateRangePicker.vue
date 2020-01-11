@@ -749,11 +749,11 @@ export default class extends Vue {
 <style lang="scss">
 .mj-daterange-picker {
   text-align: left;
-  min-width: 400px;
+  min-width: 200px;
   width: var(--default-width);
   user-select: none;
   border: 1px solid var(--border-color);
-  border-radius: 4px;
+  border-radius: 32px;
 
   & * {
     box-sizing: border-box;
@@ -775,7 +775,7 @@ export default class extends Vue {
     justify-content: center;
     height: 32px;
     padding: 5px 15px;
-    border-radius: 4px;
+    border-radius: 32px;
     cursor: pointer;
     background-color: #f2f4f5;
 
@@ -830,7 +830,7 @@ export default class extends Vue {
         height: 20px;
         width: 20px;
         background-color: var(--secondary-color);
-        border-radius: 10px;
+        border-radius: 32px;
 
         &::after {
           content: "";
@@ -840,7 +840,7 @@ export default class extends Vue {
           left: 50%;
           top: 50%;
           background-color: white;
-          border-radius: 100%;
+          border-radius: 32px;
           border: 3px solid white;
           transform: translateX(-50%) translateY(-50%);
         }
@@ -890,7 +890,7 @@ export default class extends Vue {
       align-items: center;
       justify-content: center;
       border: 1px solid var(--border-color);
-      border-radius: 4px;
+      border-radius: 32px;
       font-size: 13px;
 
       &:hover {
@@ -931,7 +931,7 @@ export default class extends Vue {
         align-items: center;
         grid-template-columns: 1fr 1fr 1fr;
         border: 1px solid var(--border-color);
-        border-radius: 4px;
+        border-radius: 32px;
         height: 50px;
         padding: 10px 30px;
 
@@ -972,7 +972,7 @@ export default class extends Vue {
       align-items: center;
       justify-content: center;
       border: 1px solid var(--border-color);
-      border-radius: 4px;
+      border-radius: 32px;
       font-size: 13px;
       margin: 10px 0;
 
@@ -1044,13 +1044,13 @@ export default class extends Vue {
     }
 
     &.is-first-range {
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
+      border-top-left-radius: 32px;
+      border-bottom-left-radius: 32px;
     }
 
     &.is-last-range {
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
+      border-top-right-radius: 32px;
+      border-bottom-right-radius: 32px;
     }
 
     &.is-edge-range {
@@ -1092,7 +1092,7 @@ export default class extends Vue {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 32px;
     font-size: 12px;
 
     &:not(.is-disabled) {
