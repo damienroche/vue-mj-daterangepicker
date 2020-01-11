@@ -155,7 +155,7 @@ const dictonnaries = {
     }
   },
 "vi": {
-    "reset": "Đặt lại khoảng ngày",
+    "reset": "Đặt lại",
     "submit": "Áp dụng",
     "previousMonth": "Tháng trước",
     "nextMonth": "Tháng tới",
@@ -171,11 +171,11 @@ const dictonnaries = {
     },
     "presets": {
       "custom": "Khoảng tùy chỉnh",
-      "forever": "From the beginning",
-      "last7days": "7 ngày gần đây",
-      "last30days": "30 ngày gần đây",
-      "last90days": "90 ngày gần đây",
-      "last365days": "365 ngày gần đây",
+      "forever": "Từ khi bắt đầu",
+      "last7days": "1 tuần trước",
+      "last30days": "30 ngày trước",
+      "last90days": "90 ngày trước",
+      "last365days": "365 ngày trước",
       "next365days": "365 ngày tới",
       "next90days": "90 ngày tới",
       "next30days": "30 ngày tới",
