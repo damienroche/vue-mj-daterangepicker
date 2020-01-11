@@ -42,7 +42,7 @@
       }
     }
     locale: string = 'fr'
-    locales: string[] = ['en', 'de', 'ru', 'es', 'fr']
+    locales: string[] = ['en', 'de', 'ru', 'es', 'fr','vi']
     checkUpdate(values) {
       this.$router.push({ query: Object.assign({}, this.$route.query, {
         to: values.to,
