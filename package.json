@@ -1,8 +1,8 @@
 {
-  "name": "vue-tql-daterangepicker",
-  "version": "0.1.5",
-  "main": "./dist/vue-tql-daterangepicker.common.js",
-  "author": "quanlinh (get source of damien roche <damienroche@free.fr>)",
+  "name": "vue-mj-daterangepicker",
+  "version": "0.1.10",
+  "main": "./dist/vue-mj-daterangepicker.common.js",
+  "author": "damien roche <damienroche@free.fr>",
   "keywords": [
     "datepicker",
     "daterangepicker",
@@ -12,7 +12,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name vue-tql-daterangepicker ./src/components/index.js",
+    "build-bundle": "vue-cli-service build --target lib --name vue-mj-daterangepicker ./src/components/index.js",
     "svg": "vsvg -s ./src/assets/svg -t ./src/assets/icons --es6",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 9001 -c .storybook",
