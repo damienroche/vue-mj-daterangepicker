@@ -112,10 +112,11 @@ import {
   format,
   isAfter,
   isBefore,
+  parseISO,
   isSameDay,
   isSameMonth,
   isValid,
-  isWithinRange,
+  isWithinInterval,
   parse,
   startOfDay,
   startOfMonth,
@@ -126,17 +127,24 @@ import {
   subWeeks,
   subYears
 } from 'date-fns'
-
 import dictionnaries from '../translations/index.js'
+import viLocale from 'date-fns/locale/vi'
+import enLocale from 'date-fns/locale/en-US'
+import frLocale from 'date-fns/locale/fr'
+import deLocale from 'date-fns/locale/de'
+import esLocale from 'date-fns/locale/es'
+import ruLocale from 'date-fns/locale/ru'
+
 
 Vue.prototype.$legends = dictionnaries
 
 const locales = {
-  en: require('date-fns/locale/en'),
-  fr: require('date-fns/locale/fr'),
-  de: require('date-fns/locale/de'),
-  es: require('date-fns/locale/es'),
-  ru: require('date-fns/locale/ru'),
+  en: enLocale,
+  fr: frLocale,
+  de: deLocale,
+  es: esLocale,
+  ru: ruLocale,
+  vi: viLocale,
 }
 
 Vue.use(SvgIcon, {
@@ -283,8 +291,8 @@ export default class extends Vue {
   emitValuesWithSelect(values) {
     if (values.from && values.to) {
       this.$emit('select', {
-        to: format(endOfDay(this.values.to), 'YYYY-MM-DDTHH:mm:ss.SSSZ'),
-        from: format(startOfDay(this.values.from), 'YYYY-MM-DDTHH:mm:ss.SSSZ'),
+        to: format(endOfDay(new Date(this.values.to)), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+        from: format(startOfDay(new Date(this.values.from)), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
         panel: this.currentPanel
       })
     }
@@ -292,7 +300,7 @@ export default class extends Vue {
 
   @Watch('preset')
   affectPreset(preset) {
-    this.current = this.now
+    this.current = new Date(this.now)
     this.updateCalendar()
 
     switch (preset) {
@@ -300,40 +308,40 @@ export default class extends Vue {
         this.values = { from: null, to: null }
         break
       case 'today':
-        this.values = { from: startOfDay(this.now), to: this.now }
+        this.values = { from: startOfDay( new Date(this.now)), to:  new Date(this.now) }
         break
       case 'yesterday':
-        this.values = { from: startOfDay(subDays(this.now, 1)), to: endOfDay(subDays(this.now, 1)) }
+        this.values = { from: startOfDay(subDays( new Date(this.now), 1)), to: endOfDay(subDays( new Date(this.now), 1)) }
         break
       case 'tomorrow':
-        this.values = { from: startOfDay(addDays(this.now, 1)), to: endOfDay(addDays(this.now, 1)) }
+        this.values = { from: startOfDay(addDays( new Date(this.now), 1)), to: endOfDay(addDays( new Date(this.now), 1)) }
         break
       case 'last7days':
-        this.values = { from: startOfDay(subWeeks(this.now, 1)), to: this.now }
+        this.values = { from: startOfDay(subWeeks( new Date(this.now), 1)), to:  new Date(this.now) }
         break
       case 'next7days':
-        this.values = { to: startOfDay(addWeeks(this.now, 1)), from: this.now }
+        this.values = { to: startOfDay(addWeeks( new Date(this.now), 1)), from:  new Date(this.now) }
         break
       case 'last30days':
-        this.values = { from: startOfDay(subMonths(this.now, 1)), to: this.now }
+        this.values = { from: startOfDay(subMonths( new Date(this.now), 1)), to:  new Date(this.now) }
         break
       case 'next30days':
-        this.values = { to: startOfDay(addMonths(this.now, 1)), from: this.now }
+        this.values = { to: startOfDay(addMonths( new Date(this.now), 1)), from:  new Date(this.now) }
         break
       case 'last90days':
-        this.values = { from: startOfDay(subMonths(this.now, 3)), to: this.now }
+        this.values = { from: startOfDay(subMonths( new Date(this.now), 3)), to:  new Date(this.now) }
         break
       case 'next90days':
-        this.values = { to: startOfDay(addMonths(this.now, 3)), from: this.now }
+        this.values = { to: startOfDay(addMonths( new Date(this.now), 3)), from:  new Date(this.now) }
         break
       case 'last365days':
-        this.values = { from: startOfDay(subYears(this.now, 1)), to: this.now }
+        this.values = { from: startOfDay(subYears( new Date(this.now), 1)), to:  new Date(this.now) }
         break
       case 'next365days':
-        this.values = { to: startOfDay(addYears(this.now, 1)), from: this.now }
+        this.values = { to: startOfDay(addYears( new Date(this.now), 1)), from:  new Date(this.now) }
         break
       case 'forever':
-        this.values = { from: this.begin, to: this.now }
+        this.values = { from: this.begin, to:  new Date(this.now) }
         break
     }
   }
@@ -385,7 +393,7 @@ export default class extends Vue {
 
   get yearMonths() {
     const months = []
-    let month = startOfYear(this.current)
+    let month = startOfYear(new Date(this.current))
     while (months.length !== 12) {
       const isMonthAllowed = this.isRangeAllowed([startOfMonth(month), endOfMonth(month)])
 
@@ -427,7 +435,7 @@ export default class extends Vue {
   get years() {
     const years = []
     let i: number = this.yearsCount
-    let start = this.future ? addYears(this.now, this.yearsCount) : this.now
+    let start = this.future ? addYears( new Date(this.now), this.yearsCount) :  new Date(this.now)
 
     i = +this.future * this.yearsCount + +this.past * this.yearsCount + 1
 
@@ -437,7 +445,7 @@ export default class extends Vue {
       years.push({
         date: start,
         selectable: isYearAllowed,
-        displayDate: format(start, 'YYYY', { locale: locales[this.locale] })
+        displayDate: format(start, 'yyyy', { locale: locales[this.locale] })
       })
       start = subYears(start, 1)
       i = i - 1
@@ -447,11 +455,11 @@ export default class extends Vue {
   }
 
   get currentMonthName() {
-    return format(this.current, 'MMMM YYYY', { locale: locales[this.locale] })
+    return format(new Date(this.current), 'MMMM yyyy', { locale: locales[this.locale] })
   }
 
   get currentYearName() {
-    return format(this.current, 'YYYY', { locale: locales[this.locale] })
+    return format(new Date(this.current), 'yyyy', { locale: locales[this.locale] })
   }
 
   get isPresetPicker(): boolean {
@@ -481,7 +489,7 @@ export default class extends Vue {
   created() {
     // Parse Inputs
     Object.keys(this.values).forEach((value) => {
-      this.values[value] = isValid(parse(this[value])) ? this[value] : null
+      this.values[value] = isValid(parseISO(this[value])) ? this[value] : null
     })
 
     // Todo ? If from or to is null, or from is after to, both are null
@@ -600,24 +608,24 @@ export default class extends Vue {
   updateCalendar() {
     const days = []
 
-    const lastDayOfMonth = endOfMonth(this.current)
-    const firstDayOfMonth = startOfMonth(this.current)
-    const nbDaysLastMonth = (+format(firstDayOfMonth, 'd') - 1) % 7
+    const lastDayOfMonth = endOfMonth(new Date(this.current))
+    const firstDayOfMonth = startOfMonth(new Date(this.current))
+    const nbDaysLastMonth = (+format(new Date(firstDayOfMonth), 'd') - 1) % 7
 
     let day = subDays(firstDayOfMonth, nbDaysLastMonth)
 
     while (isBefore(day, lastDayOfMonth) || days.length % 7 > 0) {
       const isAllowedByFutureAndPast =
-        this.future && isAfter(day, this.now)
+        this.future && isAfter(day, new Date(this.now))
           ? true
-          : false || (this.past && isBefore(day, this.now))
+          : false || (this.past && isBefore(day,  new Date(this.now)))
           ? true
-          : false || isSameDay(day, this.now)
+          : false || isSameDay(day,  new Date(this.now))
       const isAllowedByAllowedProps = this.isDateAllowed(day)
       days.push({
         date: day,
         selectable: isAllowedByFutureAndPast && isAllowedByAllowedProps,
-        currentMonth: isSameMonth(this.current, day)
+        currentMonth: isSameMonth(new Date(this.current), day)
       })
       day = addDays(day, 1)
     }
@@ -633,14 +641,14 @@ export default class extends Vue {
     if (
       this.values.from &&
       this.values.to &&
-      isWithinRange(day.date, this.values.from, this.values.to)
+      isWithinInterval(day.date, {start: new Date(this.values.from), end: new Date(this.values.to)})
     ) {
       classes.push('is-selected')
     }
     if (!day.selectable) {
       classes.push('is-disabled')
     }
-    if (isSameDay(day.date, this.now)) {
+    if (isSameDay(day.date,  new Date(this.now))) {
       classes.push('is-today')
     }
     if (
@@ -663,7 +671,7 @@ export default class extends Vue {
 
     if (
       this.hoverRange.length === 2 &&
-      isWithinRange(day.date, this.hoverRange[0], this.hoverRange[1])
+      isWithinInterval(day.date, {start: this.hoverRange[0], end: this.hoverRange[1]})
     ) {
       classes.push('is-in-range')
     }
@@ -678,7 +686,7 @@ export default class extends Vue {
     if (
       this.values.to &&
       this.values.from &&
-      isWithinRange(month.date, this.values.from, this.values.to)
+      isWithinInterval(month.date, {start: new Date(this.values.from), end: new Date(this.values.to)})
     ) {
       classes.push('is-selected')
     }
@@ -693,8 +701,8 @@ export default class extends Vue {
     if (
       this.values.to &&
       this.values.from &&
-      isWithinRange(quarter.range.start, this.values.from, this.values.to) &&
-      isWithinRange(quarter.range.end, this.values.from, this.values.to)
+      isWithinInterval(quarter.range.start, {start: new Date(this.values.from), end: new Date(this.values.to)}) &&
+      isWithinInterval(quarter.range.end, {start: new Date(this.values.from), end: new Date(this.values.to)})
     ) {
       classes.push('is-selected')
     }
@@ -721,11 +729,11 @@ export default class extends Vue {
     let isAllowed = true
 
     if (this.allowFrom) {
-      isAllowed = isAllowed && !isBefore(date, parse(this.allowFrom))
+      isAllowed = isAllowed && !isBefore(date, parseISO(this.allowFrom))
     }
 
     if (this.allowTo) {
-      isAllowed = isAllowed && !isAfter(date, parse(this.allowTo))
+      isAllowed = isAllowed && !isAfter(date, parseISO(this.allowTo))
     }
 
     return isAllowed
