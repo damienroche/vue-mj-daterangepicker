@@ -763,9 +763,9 @@ export default class extends Vue {
 .mj-daterange-picker .panels-choices {
   display: grid;
   grid-gap: 10px 10px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(75px, max-content));
   border-bottom: 1px solid var(--border-color);
-  padding: 20px;
+  padding: 10px;
 
   .panel-button {
     font-size: 12px;
@@ -788,7 +788,7 @@ export default class extends Vue {
 }
 
 .mj-daterange-picker .preset-ranges {
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border-color);
@@ -1087,7 +1087,7 @@ export default class extends Vue {
 
   .mj-daterange-picker-button {
     height: 36px;
-    min-width: 150px;
+    min-width: 50px;
     padding: 5px;
     display: inline-flex;
     align-items: center;

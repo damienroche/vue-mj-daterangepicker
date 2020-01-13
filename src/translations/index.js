@@ -163,7 +163,7 @@ const dictonnaries = {
     "nextYear": "Năm tới",
     "quarter": "Quý",
     "panels": {
-      "range": "Khoảng thời gian",
+      "range": "Khoảng",
       "week": "Tuần",
       "month": "Tháng",
       "quarter": "Quý",
