@@ -8,8 +8,8 @@
         ) {{ $legends[locale].panels[panel] }}
 
     .preset-ranges(v-if="isPresetPicker && presets.length > 1")
-      .preset(v-for="entry in availablePresets")
-        input(type="radio" v-model="preset" :id="entry" :value="entry")
+      .preset(v-for="entry in availablePresets" @click="selectPreset(entry)")
+        input(type="radio" v-model="preset" :value="entry")
         label(:for="entry")
           span.check
           span {{ $legends[locale].presets[entry] }}
@@ -524,6 +524,10 @@ export default class extends Vue {
   changeYear(diff: number) {
     this.current = subYears(this.current, diff)
     this.updateCalendar()
+  }
+
+  selectPreset(preset) {
+    this.preset = preset
   }
 
   selectDay(date) {
