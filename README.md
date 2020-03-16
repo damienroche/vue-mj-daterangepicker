@@ -29,25 +29,26 @@ Vue.use(DateRangePicker)
 
 ## Props
 
-| Name          | Type    | Default                                         | Description                                            |
-|---------------|---------|-------------------------------------------------|--------------------------------------------------------|
-| `locale`      | String  | en                                              | set the locale ['de', 'es', en', 'fr', 'ru']                             |
-| `from`        | String  | null                                            | ISO-8601 date of start range                           |
-| `to`          | String  | null                                            | ISO-8601 date of end range                             |
-| `begin`       | String  | null                                            | ISO-8601 date to display `since beginning` range       |
-| `allowFrom`   | String  | null                                            | ISO-8601 date to disable selection of all dates before (strict) |
-| `allowTo`   | String  | null                                            | ISO-8601 date to disable selection of all dates after (strict) |
-| `past`        | Boolean | true                                            | allow/disallow user to select past dates               |
-| `future`      | Boolean | true                                            | allow/disallow user to select future dates             |
-| `panel`       | String  | null                                            | choose which panel to be open by default               |
-| `panels`      | Array   | [ 'range', 'week', 'month', 'quarter', 'year' ] | choose which panels to be available                    |
-| `yearsCount`  | Number  | 2                                               | number of past/future years to display in `year` panel |
-| `showControls`| Boolean | true                                            | show bottom controls                                   |
-| `theme`       | Object  | see customize section                           | customize colors                                       |
-| `width`       | String  | 'auto'                                          | set component width                                    |
-| `resetTitle`  | String  | 'Reset'                                         | change Reset button title                              |
-| `submitTitle` | String  | 'Submit'                                        | change Submit button title                             |
-| `presets`     | Object  | see preset section                              | select which presets to be available                   |
+| Name              | Type    | Default                                         | Description                                                     |
+|-------------------|---------|-------------------------------------------------|-----------------------------------------------------------------|
+| `locale`          | String  | en                                              | set the locale ['de', 'es', en', 'fr', 'ru']                    |
+| `from`            | String  | null                                            | ISO-8601 date of start range                                    |
+| `to`              | String  | null                                            | ISO-8601 date of end range                                      |
+| `begin`           | String  | null                                            | ISO-8601 date to display `since beginning` range                |
+| `allowFrom`       | String  | null                                            | ISO-8601 date to disable selection of all dates before (strict) |
+| `allowTo`         | String  | null                                            | ISO-8601 date to disable selection of all dates after (strict)  |
+| `past`            | Boolean | true                                            | allow/disallow user to select past dates                        |
+| `future`          | Boolean | true                                            | allow/disallow user to select future dates                      |
+| `panel`           | String  | null                                            | choose which panel to be open by default                        |
+| `panels`          | Array   | [ 'range', 'week', 'month', 'quarter', 'year' ] | choose which panels to be available                             |
+| `yearsCount`      | Number  | 2                                               | number of past/future years to display in `year` panel          |
+| `showControls`    | Boolean | true                                            | show bottom controls                                            |
+| `theme`           | Object  | see customize section                           | customize colors                                                |
+| `width`           | String  | 'auto'                                          | set component width                                             |
+| `resetTitle`      | String  | 'Reset'                                         | change Reset button title                                       |
+| `submitTitle`     | String  | 'Submit'                                        | change Submit button title                                      |
+| `presets`         | Object  | see preset section                              | select which presets to be available                            |
+| `rangeDisplayed`  | String  | 'to'                                            | select which range is visible when calendar is displayed        |
 
 ### Customize
 ```javascript
