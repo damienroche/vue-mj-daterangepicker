@@ -271,6 +271,14 @@ export default class extends Vue {
     ]
   }) presets
 
+  @Prop({
+    type: String,
+    default: 'to',
+    validator: (value) => {
+      return [ 'to', 'from' ].indexOf(value) !== -1
+    }
+  }) rangeDisplayed
+
   @Watch('currentPanel', { immediate: true })
   switchMode(panel) {
     this.weekSelector = panel === 'week' ? true : false
@@ -487,7 +495,7 @@ export default class extends Vue {
     // Todo ? If from or to is null, or from is after to, both are null
 
     // Display current month or "to" month
-    this.current = this.values.to ? this.values.to : this.now
+    this.current = this.values[this.rangeDisplayed] ? this.values[this.rangeDisplayed] : this.now
 
     // Update Calendar
     this.updateCalendar()
@@ -606,7 +614,10 @@ export default class extends Vue {
 
     const lastDayOfMonth = endOfMonth(this.current)
     const firstDayOfMonth = startOfMonth(this.current)
-    const nbDaysLastMonth = (+format(firstDayOfMonth, 'd') - 1) % 7
+    let nbDaysLastMonth = (+format(firstDayOfMonth, 'd') - 1) % 7
+    if (nbDaysLastMonth === -1) {
+      nbDaysLastMonth = 6
+    }
 
     let day = subDays(firstDayOfMonth, nbDaysLastMonth)
 
