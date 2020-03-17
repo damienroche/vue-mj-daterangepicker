@@ -697,6 +697,9 @@ export default class extends Vue {
     ) {
       classes.push('is-selected')
     }
+    if ((!this.past && isBefore(month.date, this.now)) || (!this.future && isAfter(month.date, this.now))) {
+      classes.push('is-disabled')
+    }
     return classes
   }
 
@@ -712,6 +715,12 @@ export default class extends Vue {
       isWithinRange(quarter.range.end, this.values.from, this.values.to)
     ) {
       classes.push('is-selected')
+    }
+    if (
+      (!this.past && isBefore(quarter.range.start, this.now))
+      || (!this.future && isAfter(quarter.range.start, this.now))
+    ) {
+      classes.push('is-disabled')
     }
     return classes
   }
