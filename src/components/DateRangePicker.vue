@@ -493,7 +493,11 @@ export default class extends Vue {
 
   created() {
     // Assign default value to preset
-    this.preset = this.defaultPreset
+    if (this.to || this.from) {
+      this.preset = 'custom'
+    } else {
+      this.preset = this.defaultPreset
+    }
 
     // Parse Inputs
     Object.keys(this.values).forEach((value) => {
