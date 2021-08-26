@@ -162,7 +162,7 @@ export default class extends Vue {
     to: null
   }
   hoverRange = []
-  preset = 'custom'
+  preset = null
 
   @Prop({
     type: String,
@@ -270,6 +270,11 @@ export default class extends Vue {
       'custom'
     ]
   }) presets
+
+  @Prop({
+    type: String,
+    default: 'custom'
+  }) defaultPreset
 
   @Prop({
     type: String,
@@ -487,6 +492,13 @@ export default class extends Vue {
   }
 
   created() {
+    // Assign default value to preset
+    if (this.to || this.from) {
+      this.preset = 'custom'
+    } else {
+      this.preset = this.defaultPreset
+    }
+
     // Parse Inputs
     Object.keys(this.values).forEach((value) => {
       this.values[value] = isValid(parse(this[value])) ? this[value] : null
@@ -569,7 +581,7 @@ export default class extends Vue {
         this.hoverRange = []
       }
     }
-    this.preset = 'custom'
+    this.preset = this.defaultPreset
   }
 
   selectQuarter(quarter) {
