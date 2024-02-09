@@ -11,8 +11,8 @@
   "license": "MIT",
   "scripts": {
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider &&  vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name vue-mj-daterangepicker ./src/components/index.js",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    "build-bundle": "set NODE_OPTIONS=--openssl-legacy-provider &&  vue-cli-service build --target lib --name vue-mj-daterangepicker ./src/components/index.js",
     "svg": "vsvg -s ./src/assets/svg -t ./src/assets/icons --es6",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 9001 -c .storybook",
