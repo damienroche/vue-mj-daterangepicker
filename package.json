@@ -1,6 +1,6 @@
 {
   "name": "vue-mj-daterangepicker",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "main": "./dist/vue-mj-daterangepicker.common.js",
   "author": "damien roche <damienroche@free.fr>",
   "keywords": [
